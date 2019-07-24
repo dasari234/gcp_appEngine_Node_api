@@ -26,11 +26,15 @@ app.get('/', async (req, res, next) => {
   try {
     res
       .status(200)
-      .set('Content-Type', 'text/plain')
+      .set('Content-Type', 'application/json')
       .send(`🎉 Hello WELCOME! 🎉`)
       .end();
   } catch (error) {
-    next(error);
+    res
+    .status(400)
+    .set('Content-Type', 'application/json')
+    .send(`${error}`)
+    .end();
   }
 });
 
@@ -46,11 +50,15 @@ app.post('/addCustomer', async (req, res, next) => {
     await datastore.save(new_customer);
     res
       .status(200)
-      .set('Content-Type', 'text/plain')
+      .set('Content-Type', 'application/json')
       .send(`🎉 Successfully created New Customer! 🎉`)
       .end();
   } catch (error) {
-    next(error);
+    res
+    .status(400)
+    .set('Content-Type', 'application/json')
+    .send(`${error}`)
+    .end();
   }
 });
 
@@ -69,7 +77,11 @@ router.get("/getCustomers", async (req, res, next) => {
       .send(_newCustomers)
       .end();
   } catch (error) {
-    next(error);
+    res
+    .status(400)
+    .set('Content-Type', 'application/json')
+    .send(`${error}`)
+    .end();
   }
 });
 /*
@@ -81,14 +93,17 @@ router.get("/getCustomer", async (req, res, next) => {
   try {
     const key = datastore.key(['Customer', parseInt(req.query.id)]);
     const customer = await datastore.get(key);
-
     res
       .status(200)
       .set('Content-Type', 'application/json')
-      .send({ _id:req.query.id, customer })
+      .send({ _id: req.query.id, customer })
       .end();
   } catch (error) {
-    next(error);
+    res
+    .status(400)
+    .set('Content-Type', 'application/json')
+    .send(`${error}`)
+    .end();
   }
 });
 
@@ -100,14 +115,17 @@ router.get("/getCustomers/:id", async (req, res, next) => {
   try {
     const key = datastore.key(['Customer', parseInt(req.params.id)]);
     const customer = await datastore.get(key);
-
     res
       .status(200)
       .set('Content-Type', 'application/json')
-      .send({ _id:req.params.id, customer })
+      .send({ _id: req.params.id, customer })
       .end();
   } catch (error) {
-    next(error);
+    res
+    .status(400)
+    .set('Content-Type', 'application/json')
+    .send(`${error}`)
+    .end();
   }
 });
 
