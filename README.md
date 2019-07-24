@@ -11,7 +11,7 @@ Example : https://i-academy-243007.appspot.com/getCustomers
 
 
 2. Get data for a single customer filtered by id : getCustomers/:id Route : Will fetch a result for a particular given id in Json format. <br/>
-Example GET METHOD with QUERY PARAM: https://i-academy-243007.appspot.com/getCustomer?id=5681556802764800
+Example GET METHOD with QUERY PARAM: https://i-academy-243007.appspot.com/getCustomer?id=5681556802764800 <br/>
 <b>OR</b> <br/>
 Example GET METHOD with PATH PARAM: https://i-academy-243007.appspot.com/getCustomers/5681556802764800 <br/>
 
