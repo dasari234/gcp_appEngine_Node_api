@@ -31,10 +31,10 @@ app.get('/', async (req, res, next) => {
       .end();
   } catch (error) {
     res
-    .status(400)
-    .set('Content-Type', 'application/json')
-    .send(`${error}`)
-    .end();
+      .status(400)
+      .set('Content-Type', 'application/json')
+      .send(`${error}`)
+      .end();
   }
 });
 
@@ -55,10 +55,10 @@ app.post('/addCustomer', async (req, res, next) => {
       .end();
   } catch (error) {
     res
-    .status(400)
-    .set('Content-Type', 'application/json')
-    .send(`${error}`)
-    .end();
+      .status(400)
+      .set('Content-Type', 'application/json')
+      .send(`${error}`)
+      .end();
   }
 });
 
@@ -78,10 +78,10 @@ router.get("/getCustomers", async (req, res, next) => {
       .end();
   } catch (error) {
     res
-    .status(400)
-    .set('Content-Type', 'application/json')
-    .send(`${error}`)
-    .end();
+      .status(400)
+      .set('Content-Type', 'application/json')
+      .send(`${error}`)
+      .end();
   }
 });
 /*
@@ -91,7 +91,7 @@ Get single customer data from GCP Datastore database
 
 router.get("/getCustomer", async (req, res, next) => {
   try {
-    const key = datastore.key(['Customer', parseInt(req.query.id)]);
+   const key = datastore.key(['Customer', parseInt(req.query.id)]);
     const customer = await datastore.get(key);
     res
       .status(200)
@@ -100,10 +100,10 @@ router.get("/getCustomer", async (req, res, next) => {
       .end();
   } catch (error) {
     res
-    .status(400)
-    .set('Content-Type', 'application/json')
-    .send(`${error}`)
-    .end();
+      .status(400)
+      .set('Content-Type', 'application/json')
+      .send(`${error}`)
+      .end();
   }
 });
 
@@ -122,10 +122,10 @@ router.get("/getCustomers/:id", async (req, res, next) => {
       .end();
   } catch (error) {
     res
-    .status(400)
-    .set('Content-Type', 'application/json')
-    .send(`${error}`)
-    .end();
+      .status(400)
+      .set('Content-Type', 'application/json')
+      .send(`${error}`)
+      .end();
   }
 });
 
