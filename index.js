@@ -38,7 +38,7 @@ app.post('/addCustomer', async (req, res, next) => {
 
 router.get("/getCustomers", async (req, res, next) => {
   try {
-    const query = datastore.createQuery(`Customer`).order('name');
+    const query_customers = datastore.createQuery(`Customer`).order('name');
     const [customers] = await datastore.runQuery(query);
     const customersWithKey = customers.map((customer) => ({ _id: customer[datastore.KEY].id, ...customer }));
     res.json(customersWithKey);
@@ -49,7 +49,7 @@ router.get("/getCustomers", async (req, res, next) => {
 
 router.get("/getCustomer", async (req, res, next) => {
   try {
-   const query = datastore.key(['Customer', parseInt(req.query.id)]);
+   const query_customer = datastore.key(['Customer', parseInt(req.query.id)]);
    const customer = await datastore.get(query);
     res.json(customer);
   } catch (error) {
