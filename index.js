@@ -1,7 +1,8 @@
 const PORT = Number(process.env.PORT) || 8080;
 const express = require('express');
 const bodyParser = require ('body-parser');
-const {Datastore} = require('@google-cloud/datastore');
+const { Datastore } = require('@google-cloud/datastore');
+const dataStoreConfig = require('./dataStoreConfig')
 
 const app = express();
 app.enable('trust proxy');
@@ -13,7 +14,7 @@ const router = express.Router();
 app.use(router);
 
 const datastore = new Datastore();
-const customerKey = datastore.key(['Customer']);
+const customerKey = datastore.key([dataStoreConfig.customerKind]);
 
 app.get('/', async (req, res, next) => {
     try {
@@ -38,8 +39,8 @@ app.post('/addCustomer', async (req, res, next) => {
 
 router.get("/getCustomers", async (req, res, next) => {
   try {
-    const query_customers = datastore.createQuery(`Customer`).order('name');
-    const [customers] = await datastore.runQuery(query);
+    const query_customers = datastore.createQuery(dataStoreConfig.customerKind).order('name');
+    const [customers] = await datastore.runQuery(query_customers);
     const customersWithKey = customers.map((customer) => ({ _id: customer[datastore.KEY].id, ...customer }));
     res.json(customersWithKey);
   } catch (error) {
@@ -49,8 +50,8 @@ router.get("/getCustomers", async (req, res, next) => {
 
 router.get("/getCustomer", async (req, res, next) => {
   try {
-   const query_customer = datastore.key(['Customer', parseInt(req.query.id)]);
-   const customer = await datastore.get(query);
+   const query_customer = datastore.key([dataStoreConfig.customerKind, parseInt(req.query.id)]);
+   const customer = await datastore.get(query_customer);
     res.json(customer);
   } catch (error) {
     res.status(400).json(error);
